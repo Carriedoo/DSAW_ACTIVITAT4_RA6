@@ -9,4 +9,38 @@
 8- Afegir l'element div dins del contenidor 'tasques-contanier' a partir del mètode 'insertAdjacentElement'.
 */
 
-let comptadorTasques;
+const botons = document.querySelectorAll("button");
+
+let comptadorTasques = 0;
+let tasquesContainer = document.querySelector(".tasques-contanier");
+let butoAfegir = botons[0];
+let butoBorrar = botons[1];
+let pInput = document.getElementById("novaTasca");
+
+butoAfegir.addEventListener('click', function() {
+    let text = pInput.value;
+
+    if (text === "") {
+        alert("No has escrit la nova tasca")
+    } else {
+        comptadorTasques += 1;
+
+        let dev = document.createElement("div");
+        tasquesContainer.appendChild(dev);
+        comptadorTasques % 2 == 0 ? dev.classList.add("tasca-parell") : dev.classList.add("tasca-imparell");
+
+        let h3 = document.createElement("h3");
+        h3.textContent = "Tasca " + comptadorTasques;
+        dev.appendChild(h3);
+
+        let p = document.createElement("p");
+        p.textContent = text;
+        dev.appendChild(p)
+    }
+});
+
+butoBorrar.addEventListener('click', function() {
+    let tasquesEsborrar = document.querySelector(".tasques-contanier");
+    tasquesEsborrar.innerHTML = "";
+    comptadorTasques = 0;
+});
